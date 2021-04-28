@@ -1,0 +1,14 @@
+FROM node:alpine
+#Sets the working directory
+WORKDIR '/app'
+
+#Copies specifically package.json to make lower copy redundant if no other files have changes
+COPY package.json .
+
+RUN npm install
+
+#Copies all files if there have been any changes
+COPY . .
+
+#Finally, starts npm
+CMD ["npm", "run", "start"]
